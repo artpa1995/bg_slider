@@ -17,11 +17,30 @@ const Slider = () => {
     slideRef.current.prepend(items[items.length - 1]);
   };
 
+
+  const handleClickThis = (item) => {
+    const items = Array.from(slideRef.current.querySelectorAll(".item"));
+    const itemIndex = items.findIndex((i) => i.dataset.id === item.id.toString());
+  
+    const targetIndex = 1; 
+    const shiftAmount = targetIndex - itemIndex;
+  
+    if (shiftAmount !== 0) {
+      const shiftedItems = [...items];
+      const clickedItem = shiftedItems.splice(itemIndex, 1)[0];
+      const newIndex = (targetIndex + shiftedItems.length) % shiftedItems.length;
+      shiftedItems.splice(newIndex, 0, clickedItem);
+      slideRef.current.innerHTML = "";
+      shiftedItems.forEach((shiftedItem) => slideRef.current.appendChild(shiftedItem));
+    }
+  };
+
+
   const data = [
     {
       id: 1,
       imgUrl: "https://i.postimg.cc/PrMGqZwx/pexels-m-venter-1659437.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
+      desc: "Some beautiful roads cannot be discovered without getting loss. Some beautiful roads cannot be discovered without getting loss.",
       name: "EXPLORE NATURE",
     },
     {
@@ -51,6 +70,20 @@ const Slider = () => {
       desc: "Some beautiful roads cannot be discovered without getting loss.",
       name: "EXPLORE NATURE",
     },
+    {
+      id: 7,
+      imgUrl:
+        "https://kinojump.com/uploads/mini/full-poster/71/b11f9ff565deb2496b920c806b24d9.webp",
+      desc: "Some beautiful roads cannot be discovered without getting loss.",
+      name: "EXPLORE NATURE",
+    },
+    {
+      id: 8,
+      imgUrl:
+        "https://kinojump.com/uploads/mini/full-poster/e1/85f1624776563c98c0417c5572f972.webp",
+      desc: "Some beautiful roads cannot be discovered without getting loss.",
+      name: "EXPLORE NATURE",
+    },
   ];
 
   return (
@@ -59,8 +92,10 @@ const Slider = () => {
       <div id="slide" ref={slideRef}>
         {data.map((item) => (
           <div
+          onClick={() => handleClickThis(item)} 
             key={item.id}
             className="item"
+            data-id={item.id} 
             style={{ backgroundImage: `url(${item.imgUrl})` }}
           >
             <div className="content">

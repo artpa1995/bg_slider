@@ -1,0 +1,21 @@
+# Node.js and NPM
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+.*.swp
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Compiled output and build folders
+dist/
+build/
